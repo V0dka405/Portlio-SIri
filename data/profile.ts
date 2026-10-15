@@ -21,7 +21,7 @@ export const profile = {
   // Square photo in /public. null = placeholder
   photo: '/profile.jpg' as string | null,
   // TODO: set NEXT_PUBLIC_SITE_URL on Vercel (or edit the fallback) for correct OG / sitemap URLs
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://siriwut-portfolio.vercel.app',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portlio-s-iri.vercel.app',
   seoDescription:
     'Portfolio of Siriwut Saleephan — Computer Engineering (AIoT) student building full-stack web apps, IoT systems (ESP32, MQTT) and computer-vision projects.',
 };
