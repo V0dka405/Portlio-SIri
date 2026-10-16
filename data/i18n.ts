@@ -21,7 +21,7 @@ const en = {
     downloadCv: 'Download CV (PDF)',
     photoAlt: 'Profile photo of Siriwut Saleephan',
     photoPlaceholderAlt: 'Profile photo placeholder',
-    openToWork: 'Open to internships & junior developer roles',
+    openToWork: 'Open to internships',
   },
   about: {
     eyebrow: 'About',
@@ -99,7 +99,7 @@ const th: Dictionary = {
     downloadCv: 'ดาวน์โหลด CV (PDF)',
     photoAlt: 'รูปโปรไฟล์ของ Siriwut Saleephan',
     photoPlaceholderAlt: 'ตำแหน่งรูปโปรไฟล์',
-    openToWork: 'พร้อมสำหรับโอกาสฝึกงานและตำแหน่งงานระดับ Junior',
+    openToWork: 'พร้อมสำหรับโอกาสฝึกงาน',
   },
   about: {
     eyebrow: 'เกี่ยวกับ',

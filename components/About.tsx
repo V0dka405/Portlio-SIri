@@ -31,12 +31,12 @@ export default function About() {
 
             {/* Profile Info */}
             <div className="text-center">
-              <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-bg/80 px-3 py-1 text-[11px] sm:text-xs text-muted font-mono mb-3 max-w-full">
+              <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-bg/80 px-4 py-1 text-xs text-muted font-mono mb-3 whitespace-nowrap">
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
-                <span className="text-fg/90 leading-snug">{t.hero.openToWork}</span>
+                <span className="text-fg/90">{t.hero.openToWork}</span>
               </div>
 
               <h3 className="font-display text-2xl font-bold tracking-tight text-fg">
