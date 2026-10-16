@@ -20,10 +20,10 @@ export default function About() {
           : 'Computer Engineering (CPE) student focused on building high-performance Web Apps, Mobile Apps, and robust Backend systems with IoT/AI integration.'
       }
     >
-      <div className="grid gap-5 sm:gap-8 lg:grid-cols-12 items-start">
+      <div className="grid grid-cols-1 gap-5 sm:gap-8 lg:grid-cols-12 items-start">
         {/* Left Column (5 cols): Profile & Quick Bio Card */}
-        <div className="lg:col-span-5 flex flex-col gap-5 sm:gap-6">
-          <div className="rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
+        <div className="min-w-0 w-full lg:col-span-5 flex flex-col gap-5 sm:gap-6">
+          <div className="w-full rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
             {/* Centered Photo */}
             <div className="flex justify-center pb-4 sm:pb-5">
               <ProfilePhoto size="md" />
@@ -31,12 +31,12 @@ export default function About() {
 
             {/* Profile Info */}
             <div className="text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-bg/80 px-3 py-1 text-[11px] sm:text-xs text-muted font-mono mb-3 max-w-full">
+              <div className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-bg/80 px-3 py-1 text-[11px] sm:text-xs text-muted font-mono mb-3 max-w-full">
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
-                <span className="text-fg/90 truncate">{t.hero.openToWork}</span>
+                <span className="text-fg/90 leading-snug">{t.hero.openToWork}</span>
               </div>
 
               <h3 className="font-display text-2xl font-bold tracking-tight text-fg">
@@ -52,7 +52,7 @@ export default function About() {
               </p>
 
               {/* Action Buttons */}
-              <div className="mt-6 flex flex-col gap-2.5">
+              <div className="mt-5 sm:mt-6 flex flex-col gap-2.5">
                 <a
                   href={profile.cvPath}
                   download
@@ -62,7 +62,7 @@ export default function About() {
                   <span>Download CV</span>
                 </a>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2.5">
                   <a
                     href={profile.github}
                     target="_blank"
@@ -82,13 +82,13 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Quick Info Specs */}
-              <div className="mt-6 pt-5 border-t border-line/40 text-left font-mono text-xs space-y-2.5 text-muted">
-                <div className="flex items-center justify-between gap-3">
+              {/* Quick Info Specs — Symmetrical & balanced on both mobile and desktop */}
+              <div className="mt-5 sm:mt-6 pt-5 border-t border-line/40 text-left font-mono text-xs space-y-3 text-muted">
+                <div className="flex items-center justify-between gap-4">
                   <span className="text-muted/70 shrink-0">// Location</span>
                   <span className="text-fg font-sans text-right">Bangkok, Thailand</span>
                 </div>
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start justify-between gap-4">
                   <span className="text-muted/70 shrink-0">// Degree</span>
                   <span className="text-fg font-sans text-right leading-snug">
                     Faculty of Information Technology,
@@ -96,7 +96,7 @@ export default function About() {
                     Department of Computer Engineering, IoT
                   </span>
                 </div>
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-4">
                   <span className="text-muted/70 shrink-0">// Focus</span>
                   <span className="text-accent font-sans text-right">Web · Mobile · IoT · AI</span>
                 </div>
@@ -106,14 +106,14 @@ export default function About() {
         </div>
 
         {/* Right Column (7 cols): Story, Roles, and Tech Stack */}
-        <div className="lg:col-span-7 flex flex-col gap-5 sm:gap-6">
+        <div className="min-w-0 w-full lg:col-span-7 flex flex-col gap-5 sm:gap-6">
           {/* Background & Mindset */}
-          <div className="rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-8 shadow-lg transition-colors duration-200 hover:border-accent/40">
+          <div className="w-full rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-8 shadow-lg transition-colors duration-200 hover:border-accent/40">
             <div className="mb-3.5 sm:mb-4 flex items-center justify-between border-b border-line/40 pb-2.5 sm:pb-3">
               <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-accent">
                 // Background & Mindset
               </span>
-              <span className="hidden sm:inline font-mono text-xs text-muted">[full_cycle_developer]</span>
+              <span className="font-mono text-[11px] sm:text-xs text-muted">[full_cycle_developer]</span>
             </div>
 
             <div className="space-y-3.5 sm:space-y-4 text-sm sm:text-base leading-relaxed text-muted font-sans">
@@ -135,8 +135,8 @@ export default function About() {
             </div>
           </div>
 
-          {/* Target Positions Card */}
-          <div className="rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
+          {/* Target Positions Card — symmetrical 2-col grid on mobile, wrap on desktop */}
+          <div className="w-full rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
             <div className="mb-3 sm:mb-3.5 flex items-center justify-between border-b border-line/40 pb-2.5">
               <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-accent">
                 // Target Positions
@@ -144,7 +144,7 @@ export default function About() {
               <span className="font-mono text-[11px] text-emerald-400">Available</span>
             </div>
 
-            <ul className="flex flex-wrap gap-1.5 sm:gap-2 pt-1" aria-label="Target roles">
+            <ul className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 pt-1" aria-label="Target roles">
               {[
                 'Full-Stack Developer',
                 'Backend Developer',
@@ -155,17 +155,17 @@ export default function About() {
               ].map((role) => (
                 <li
                   key={role}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-accent/30 bg-accent/5 px-2.5 sm:px-3 py-1 sm:py-1.5 font-mono text-[11px] sm:text-xs font-medium text-accent transition-colors hover:border-accent hover:bg-accent/15"
+                  className="inline-flex items-center justify-center sm:justify-start gap-1.5 rounded-xl border border-accent/30 bg-accent/5 px-2.5 sm:px-3 py-1.5 font-mono text-[11px] sm:text-xs font-medium text-accent transition-colors hover:border-accent hover:bg-accent/15 text-center sm:text-left"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                  {role}
+                  <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                  <span className="truncate">{role}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Core Focus / Tech Stack Card */}
-          <div className="rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
+          <div className="w-full rounded-2xl sm:rounded-3xl border border-white/10 bg-surface/90 p-5 sm:p-7 shadow-lg transition-colors duration-200 hover:border-accent/40">
             <div className="mb-3.5 sm:mb-4 flex items-center justify-between border-b border-line/40 pb-2.5">
               <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-accent">
                 // What I Work With
@@ -174,27 +174,27 @@ export default function About() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 font-mono text-xs">
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// Web & Frontend</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">React · Next.js · Tailwind CSS · TypeScript · JavaScript</p>
               </div>
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// Mobile Development</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">React Native · Expo · Mobile UI · API Integration</p>
               </div>
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// Backend & APIs</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">Node.js · Express · Go (Golang) · RESTful APIs · JWT</p>
               </div>
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// Databases</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">PostgreSQL · MySQL · MongoDB · Firebase</p>
               </div>
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// DevOps & Tools</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">Docker · Git/GitHub · Postman · Bun</p>
               </div>
-              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3 sm:p-3.5">
+              <div className="rounded-xl sm:rounded-2xl border border-line/30 bg-bg/40 p-3.5">
                 <span className="text-muted/70 block text-[10px] sm:text-[11px] uppercase tracking-wider">// Edge IoT & AI</span>
                 <p className="text-fg mt-1 font-sans text-xs sm:text-[13px] leading-relaxed">ESP32 (C/C++) · Raspberry Pi · MQTT · PCB Design · CV</p>
               </div>

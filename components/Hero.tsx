@@ -24,15 +24,15 @@ export default function Hero() {
       aria-labelledby="hero-title"
       className="flex min-h-[calc(100svh-6.5rem)] items-center py-8 sm:py-20"
     >
-      <div className="container-page grid items-center gap-6 sm:gap-10 md:gap-12 md:grid-cols-[1fr_auto]">
-        <div className="animate-fade-up order-2 md:order-1 text-center md:text-left">
+      <div className="container-page grid grid-cols-1 items-center gap-6 sm:gap-10 md:gap-12 md:grid-cols-[1fr_auto]">
+        <div className="animate-fade-up min-w-0 w-full order-2 md:order-1 text-center md:text-left">
           {/* Status badge */}
-          <div className="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[11px] sm:text-xs text-muted max-w-full">
+          <div className="mb-3 sm:mb-4 inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-[11px] sm:text-xs text-muted max-w-full">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            <span className="font-mono text-fg/90 truncate">{t.hero.openToWork}</span>
+            <span className="font-mono text-fg/90 leading-snug">{t.hero.openToWork}</span>
           </div>
 
           <p className="mb-1.5 text-sm sm:text-lg text-muted font-sans">{t.hero.greeting}</p>

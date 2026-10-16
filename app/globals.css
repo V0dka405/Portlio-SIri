@@ -27,7 +27,7 @@
   }
 
   body {
-    @apply bg-bg font-sans leading-relaxed text-fg antialiased;
+    @apply overflow-x-hidden bg-bg font-sans leading-relaxed text-fg antialiased;
   }
 
   :focus-visible {
