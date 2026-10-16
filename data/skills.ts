@@ -10,26 +10,31 @@ export const skillGroups: SkillGroupData[] = [
   {
     id: 'languages',
     title: { en: 'Languages', th: 'ภาษาโปรแกรม' },
-    items: ['C/C++', 'Python', 'JavaScript', 'TypeScript', 'CSS', 'SQL', 'Go'],
+    items: ['Go', 'TypeScript', 'JavaScript', 'Python', 'C/C++', 'SQL', 'CSS'],
   },
   {
     id: 'frameworks',
-    title: { en: 'Frameworks', th: 'เฟรมเวิร์ก' },
-    items: ['React', 'Next.js', 'Express.js', 'React Native', 'Expo'],
+    title: { en: 'Frameworks & Libraries', th: 'เฟรมเวิร์กและไลบรารี' },
+    items: ['React', 'Next.js', 'Tailwind CSS', 'React Native', 'Expo', 'Express.js'],
   },
   {
-    id: 'tools',
-    title: { en: 'Runtime & Tools', th: 'Runtime และเครื่องมือ' },
-    items: ['Node.js', 'Bun', 'Vite', 'Git/GitHub', 'Docker', 'Postman', 'Apache JMeter'],
+    id: 'databases',
+    title: { en: 'Databases', th: 'ฐานข้อมูล' },
+    items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Firebase'],
   },
   {
-    id: 'data-ai',
-    title: { en: 'Data & AI/ML', th: 'Data & AI/ML' },
-    items: ['NumPy', 'Pandas', 'Machine Learning', 'Computer Vision', 'MySQL', 'MongoDB'],
+    id: 'devops-tools',
+    title: { en: 'DevOps & Tools', th: 'DevOps และเครื่องมือ' },
+    items: ['Docker', 'Git/GitHub', 'Node.js', 'Bun', 'Postman', 'Apache JMeter'],
   },
   {
-    id: 'iot-services',
-    title: { en: 'IoT & Cloud Services', th: 'IoT และบริการคลาวด์' },
-    items: ['ESP32', 'Raspberry Pi', 'MQTT', 'Firebase', 'PostgreSQL'],
+    id: 'iot-hardware',
+    title: { en: 'IoT & Hardware', th: 'IoT และฮาร์ดแวร์' },
+    items: ['ESP32', 'Raspberry Pi', 'MQTT', 'PCB Design', 'Sensors & Relays'],
+  },
+  {
+    id: 'ai-data',
+    title: { en: 'AI & Data Science', th: 'AI และ Data Science' },
+    items: ['Computer Vision', 'Machine Learning', 'face-api.js', 'NumPy', 'Pandas'],
   },
 ];

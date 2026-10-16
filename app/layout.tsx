@@ -1,14 +1,36 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Noto_Sans_Thai } from 'next/font/google';
+import { Space_Grotesk, JetBrains_Mono, Prompt, Inter } from 'next/font/google';
+import SkipLink from '@/components/SkipLink';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import CodeBackground from '@/components/CodeBackground';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import { PageRouterProvider, PageViewport } from '@/components/PageRouter';
 import { profile } from '@/data/profile';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const notoThai = Noto_Sans_Thai({
-  subsets: ['thai'],
-  variable: '--font-noto-thai',
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+const prompt = Prompt({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['thai', 'latin'],
+  variable: '--font-prompt',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -17,6 +39,11 @@ const title = `${profile.name} — ${profile.title.en}`;
 export const metadata: Metadata = {
   metadataBase: new URL(profile.siteUrl),
   title: { default: title, template: `%s | ${profile.name}` },
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   description: profile.seoDescription,
   keywords: [
     'Siriwut Saleephan',
@@ -44,7 +71,6 @@ export const metadata: Metadata = {
     title,
     description: profile.seoDescription,
   },
-  // Favicon comes from app/icon.svg; OG image from app/opengraph-image.tsx (file conventions)
 };
 
 export const viewport: Viewport = {
@@ -53,18 +79,26 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Runs before first paint so a saved "light" choice doesn't flash dark. Dark stays the default.
-const themeInitScript = `try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoThai.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
-      <body>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${prompt.variable} ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <body id="top" className="flex min-h-screen flex-col">
         <CodeBackground />
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <PageRouterProvider>
+            <SkipLink />
+            <Navbar />
+            <main id="main" className="flex-1">
+              <PageViewport />
+              {children}
+            </main>
+            <Footer />
+          </PageRouterProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

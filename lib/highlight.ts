@@ -1,31 +1,49 @@
 /**
- * Tiny regex-based syntax highlighter for the decorative code background.
- * It only needs to look right for the short snippets in data/codeSnippets.ts, so it
- * is intentionally simple (no real parsing) and safe to run on half-typed code.
+ * Lightweight tokenizer for the decorative cybersecurity code background.
+ * Pre-tokenizes each snippet once at module load time so real-time typing
+ * appends directly to DOM text nodes with zero regex or HTML parsing per keystroke.
  */
 
-const escapeHtml = (s: string) =>
-  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+export interface CodeToken {
+  text: string;
+  cls?: string;
+}
 
-// Each capture group maps to one CSS class (see TOKEN_CLASSES below)
 const TOKEN =
-  /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*"?|`(?:[^`\\]|\\.)*`?|'(?:[^'\\\n]|\\.)*'?|<[\w.]+\.h>)|(#\w+)|(\b\d+(?:\.\d+)?\b)|(\b(?:const|int|float|void|if|else|import|from|export|async|await|function|return|new|true|false|let|var)\b)|(\.?[A-Za-z_]\w*(?=\())|(\.[A-Za-z_]\w*)|(\b[A-Z]\w*\b)/g;
+  /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*"?|`(?:[^`\\]|\\.)*`?|'(?:[^'\\\n]|\\.)*'?|\/(?:[^/\\\n]|\\.)+\/[gimsuy]*)|(#\w+)|(\b\d+(?:\.\d+)?\b)|(\b(?:package|func|def|pub|fn|const|let|var|int|float|void|bool|string|byte|error|if|else|for|in|of|import|from|export|async|await|function|return|new|true|false|nil|throw)\b)|(\.?[A-Za-z_]\w*(?=\())|(\.[A-Za-z_]\w*)|(\b[A-Z]\w*\b)/g;
 
-const TOKEN_CLASSES = ['tk-com', 'tk-str', 'tk-pre', 'tk-num', 'tk-kw', 'tk-fn', 'tk-prop', 'tk-type'];
+const TOKEN_CLASSES = [
+  'tk-com',
+  'tk-str',
+  'tk-pre',
+  'tk-num',
+  'tk-kw',
+  'tk-fn',
+  'tk-prop',
+  'tk-type',
+];
 
-/** Returns HTML where tokens are wrapped in <span class="tk-*">. Input is HTML-escaped. */
-export function highlight(code: string): string {
-  let out = '';
+/** Pre-splits a code snippet into syntax-colored token chunks once. */
+export function tokenize(code: string): CodeToken[] {
+  const tokens: CodeToken[] = [];
   let last = 0;
 
   for (const match of code.matchAll(TOKEN)) {
     const index = match.index ?? 0;
-    out += escapeHtml(code.slice(last, index));
-
+    if (index > last) {
+      tokens.push({ text: code.slice(last, index) });
+    }
     const groupIndex = match.findIndex((g, i) => i > 0 && g !== undefined);
-    out += `<span class="${TOKEN_CLASSES[groupIndex - 1]}">${escapeHtml(match[0])}</span>`;
+    tokens.push({
+      text: match[0],
+      cls: TOKEN_CLASSES[groupIndex - 1],
+    });
     last = index + match[0].length;
   }
 
-  return out + escapeHtml(code.slice(last));
+  if (last < code.length) {
+    tokens.push({ text: code.slice(last) });
+  }
+
+  return tokens;
 }

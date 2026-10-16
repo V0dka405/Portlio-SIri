@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Static export: `next build` outputs a plain HTML/CSS/JS site to ./out
-  output: 'export',
-  // The default image optimizer needs a server, so disable it for static export
+  // Static export only during production build (`next build` -> ./out).
+  // Keeping it undefined in `next dev` prevents stale SSR HTML caching & hydration mismatches.
+  output: process.env.NODE_ENV === 'production' ? 'export' : undefined,
   images: { unoptimized: true },
 };
 

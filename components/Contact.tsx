@@ -11,7 +11,7 @@ import { profile } from '@/data/profile';
 type CopyKey = 'email' | 'phone' | 'line' | null;
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const [copiedKey, setCopiedKey] = useState<CopyKey>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
@@ -32,29 +32,36 @@ export default function Contact() {
   const lineUrl = `https://line.me/ti/p/~${profile.lineId}`;
 
   return (
-    <Section id="contact" eyebrow={t.contact.eyebrow} title={t.contact.title}>
-      <Reveal className="max-w-3xl">
-        <p className="text-lg text-muted">{t.contact.body}</p>
-
+    <Section
+      id="contact"
+      eyebrow={t.contact.eyebrow}
+      title={t.contact.title}
+      subtitle={
+        locale === 'th'
+          ? 'พร้อมสำหรับการพูดคุย เสนองานฝึกงาน หรือตำแหน่งงานประจำ ติดต่อได้โดยตรงผ่านช่องทางด้านล่างครับ'
+          : 'I am actively looking for internship and junior roles. Feel free to reach out via email, phone, or Line.'
+      }
+    >
+      <Reveal className="max-w-4xl">
         {/* Contact Methods Cards */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+        <div className="grid gap-5 sm:grid-cols-3">
           {/* Email Card */}
-          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-accent/60">
+          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface/90 p-6 transition-all duration-300 hover:border-accent/60 hover:bg-surface">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+              <div className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-accent border-b border-line/40 pb-2.5">
                 <MailIcon className="h-4 w-4" />
-                <span>{t.contact.emailLabel}</span>
+                <span>// {t.contact.emailLabel}</span>
               </div>
-              <p className="mt-2 break-all text-base font-semibold text-fg">
+              <p className="mt-3 break-all font-mono text-sm font-semibold text-fg">
                 {profile.email}
               </p>
             </div>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-2">
               <a
                 href={gmailUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-semibold"
+                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-mono"
               >
                 <MailIcon className="h-3.5 w-3.5" />
                 <span>{t.contact.sendEmail}</span>
@@ -78,20 +85,20 @@ export default function Contact() {
           </div>
 
           {/* Phone Card */}
-          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-accent/60">
+          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface/90 p-6 transition-all duration-300 hover:border-accent/60 hover:bg-surface">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
+              <div className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-accent border-b border-line/40 pb-2.5">
                 <PhoneIcon className="h-4 w-4" />
-                <span>{t.contact.phoneLabel}</span>
+                <span>// {t.contact.phoneLabel}</span>
               </div>
-              <p className="mt-2 text-base font-semibold text-fg">
+              <p className="mt-3 font-mono text-base font-semibold text-fg">
                 {profile.phone}
               </p>
             </div>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-2">
               <a
                 href={`tel:${profile.phoneRaw}`}
-                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-semibold"
+                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-mono"
               >
                 <PhoneIcon className="h-3.5 w-3.5" />
                 <span>{t.contact.callPhone}</span>
@@ -115,22 +122,22 @@ export default function Contact() {
           </div>
 
           {/* Line ID Card */}
-          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-accent/60">
+          <div className="flex flex-col justify-between rounded-2xl border border-line bg-surface/90 p-6 transition-all duration-300 hover:border-accent/60 hover:bg-surface">
             <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-accent">
-                <LineIcon className="h-4 w-4" />
-                <span>{t.contact.lineLabel}</span>
+              <div className="flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-wider text-accent border-b border-line/40 pb-2.5">
+                <LineIcon className="h-4 w-4 text-[#06C755]" />
+                <span>// {t.contact.lineLabel}</span>
               </div>
-              <p className="mt-2 text-base font-semibold text-fg">
+              <p className="mt-3 font-mono text-base font-semibold text-fg">
                 {profile.lineId}
               </p>
             </div>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-6 flex items-center gap-2">
               <a
                 href={lineUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-semibold"
+                className="btn-primary flex-1 justify-center px-3 py-2 text-xs font-mono"
               >
                 <LineIcon className="h-3.5 w-3.5" />
                 <span>{t.contact.lineChat}</span>
@@ -155,15 +162,16 @@ export default function Contact() {
         </div>
 
         {/* Social / External Links */}
-        <div className="mt-8 flex items-center gap-6 border-t border-line/60 pt-6">
+        <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-line/60 pt-6 font-mono text-xs">
+          <span className="text-muted">// Links:</span>
           {profile.github && (
-            <ExternalLink href={profile.github} icon={<GithubIcon className="h-5 w-5" />}>
-              {t.contact.github}
+            <ExternalLink href={profile.github} icon={<GithubIcon className="h-4 w-4" />}>
+              {t.contact.github} ↗
             </ExternalLink>
           )}
           {profile.linkedin && (
-            <ExternalLink href={profile.linkedin} icon={<LinkedinIcon className="h-5 w-5" />}>
-              {t.contact.linkedin}
+            <ExternalLink href={profile.linkedin} icon={<LinkedinIcon className="h-4 w-4" />}>
+              {t.contact.linkedin} ↗
             </ExternalLink>
           )}
         </div>

@@ -1,78 +1,93 @@
 'use client';
 
+import { NavLink } from './PageRouter';
 import { useLanguage } from './LanguageProvider';
 import { profile } from '@/data/profile';
-
-/** Profile photo, or a neutral placeholder until `profile.photo` is set. */
-function ProfilePhoto() {
-  const { t } = useLanguage();
-
-  return (
-    <div className="relative mx-auto h-52 w-52 shrink-0 sm:h-64 sm:w-64">
-      {/* Decorative accent ring */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 translate-x-3 translate-y-3 rounded-3xl border-2 border-accent/60"
-      />
-      {profile.photo ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={profile.photo}
-          alt={t.hero.photoAlt}
-          width={256}
-          height={256}
-          fetchPriority="high"
-          className="relative h-full w-full rounded-3xl object-cover"
-        />
-      ) : (
-        <div
-          role="img"
-          aria-label={t.hero.photoPlaceholderAlt}
-          className="relative flex h-full w-full items-center justify-center rounded-3xl bg-surface text-6xl font-bold text-accent"
-        >
-          SS
-        </div>
-      )}
-    </div>
-  );
-}
+import { DownloadIcon } from './icons';
+import ProfilePhoto from './ProfilePhoto';
 
 export default function Hero() {
-  const { t, pick } = useLanguage();
+  const { t, pick, locale } = useLanguage();
+
+  const targetRoles = [
+    'Full-Stack Developer',
+    'Backend Developer',
+    'Mobile Developer',
+    'Frontend Developer',
+    'IoT Engineer',
+    'AI Engineer',
+  ];
 
   return (
     <section
       id="top"
       aria-labelledby="hero-title"
-      className="flex min-h-[calc(100svh-4rem)] items-center py-16"
+      className="flex min-h-[calc(100svh-4rem)] items-center py-16 sm:py-24"
     >
-      <div className="container-page grid items-center gap-12 md:grid-cols-[1fr_auto]">
-        {/* CSS animation (not Framer) so the hero is visible immediately: better LCP */}
-        <div className="animate-fade-up">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-muted">
-            <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
-            {t.hero.openToWork}
-          </p>
-          <p className="mb-2 text-lg text-muted">{t.hero.greeting}</p>
-          <h1 id="hero-title" className="text-4xl font-extrabold tracking-tight sm:text-6xl">
+      <div className="container-page grid items-center gap-8 md:gap-12 md:grid-cols-[1fr_auto]">
+        <div className="animate-fade-up order-2 md:order-1">
+          {/* Status badge */}
+          <div className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface px-3.5 py-1 text-xs text-muted">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            <span className="font-mono text-fg/90">{t.hero.openToWork}</span>
+          </div>
+
+          <p className="mb-2 text-base sm:text-lg text-muted font-sans">{t.hero.greeting}</p>
+
+          <h1
+            id="hero-title"
+            className="font-display text-4xl font-extrabold tracking-tight text-fg sm:text-6xl lg:text-7xl"
+          >
             {profile.name}
           </h1>
-          <p className="mt-3 text-xl font-medium text-accent sm:text-2xl">{pick(profile.title)}</p>
-          {t.hero.tagline ? (
-            <p className="mt-6 max-w-xl text-base text-muted sm:text-lg">{t.hero.tagline}</p>
-          ) : null}
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#projects" className="btn-primary">
-              {t.hero.viewProjects}
-            </a>
-            <a href={profile.cvPath} download className="btn-ghost">
-              {t.hero.downloadCv}
+          <p className="mt-3 font-display text-xl font-semibold text-accent sm:text-2xl">
+            {pick(profile.title)}
+          </p>
+
+          {/* Target Positions Pills */}
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <span className="font-mono text-xs text-muted mr-1">
+              {locale === 'th' ? '// สายงาน:' : '// roles:'}
+            </span>
+            {targetRoles.map((role) => (
+              <span
+                key={role}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-accent/30 bg-accent/5 px-2.5 py-1 font-mono text-xs text-accent transition-colors hover:border-accent hover:bg-accent/10"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                {role}
+              </span>
+            ))}
+          </div>
+
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg font-sans">
+            {locale === 'th'
+              ? 'มุ่งเน้นการพัฒนา Full-Stack Web Application, Mobile App และ Backend System ที่มีประสิทธิภาพ รองรับการขยายตัว และตอบโจทย์ผู้ใช้งานจริง พร้อมต่อยอดเชื่อมต่อกับระบบ IoT และ AI ได้อย่างครบวงจร'
+              : 'Specializing in Full-Stack Web Applications, Mobile Apps, and scalable Backend systems with clean architecture. Ready to build robust digital products with the added edge of IoT and AI integration.'}
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <NavLink href="/projects" className="btn-primary text-sm font-semibold">
+              {t.hero.viewProjects} →
+            </NavLink>
+            <a
+              href={profile.cvPath}
+              download
+              className="btn-ghost text-sm font-semibold inline-flex items-center gap-2"
+            >
+              <DownloadIcon className="h-4 w-4 text-accent" />
+              <span>{t.hero.downloadCv}</span>
             </a>
           </div>
         </div>
 
-        <ProfilePhoto />
+        <div className="order-1 md:order-2 flex justify-center">
+          <ProfilePhoto size="lg" />
+        </div>
       </div>
     </section>
   );

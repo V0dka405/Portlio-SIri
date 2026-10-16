@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme tokens as "R G B" triplets so Tailwind can apply opacity modifiers.
-   Dark is the default; adding class "light" on <html> switches theme. */
+/* Permanent Dark Theme tokens as "R G B" triplets for Tailwind opacity modifiers. */
 :root {
   --c-bg: 43 43 43; /* #2B2B2B */
   --c-surface: 58 52 52; /* #3A3434 */
@@ -16,21 +15,9 @@
   color-scheme: dark;
 }
 
-:root.light {
-  --c-bg: 255 255 255;
-  --c-surface: 245 245 244;
-  --c-elevated: 231 229 228;
-  --c-fg: 28 25 23;
-  --c-muted: 87 83 78;
-  --c-line: 214 211 209;
-  --c-accent: 21 128 61; /* darker green keeps AA contrast on white */
-  --c-on-accent: 255 255 255;
-  color-scheme: light;
-}
-
 @layer base {
   html {
-    scroll-padding-top: 5rem; /* offset for the sticky navbar */
+    scroll-padding-top: 6.5rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -43,7 +30,6 @@
     @apply bg-bg font-sans leading-relaxed text-fg antialiased;
   }
 
-  /* Visible focus ring for keyboard users */
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-accent;
   }
@@ -73,74 +59,41 @@
   .chip {
     @apply inline-flex items-center rounded-full border border-line bg-bg/40 px-3 py-1 text-xs font-medium text-fg;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
-/* Animated code background — neon VS Code look (Synthwave '84-style palette) */
+/* Decorative background code watermark — zero text-shadow blur for fast GPU rasterization */
 .code-bg-block {
   color: #e8e6ff;
-  text-shadow: 0 0 8px rgb(232 230 255 / 0.5);
-  -webkit-mask-image: linear-gradient(to right, #000 70%, transparent);
-  mask-image: linear-gradient(to right, #000 70%, transparent);
 }
 
-/* Each token sets --tk once; color and glow both derive from it */
 .code-bg-block [class^='tk-'] {
   color: var(--tk);
-  text-shadow:
-    0 0 6px var(--tk),
-    0 0 16px var(--tk);
 }
-.tk-kw { --tk: #fede5d; } /* keywords: neon yellow */
-.tk-fn { --tk: #36f9f6; } /* function calls: cyan */
-.tk-str { --tk: #ff8b39; } /* strings: orange */
-.tk-num { --tk: #f97e72; } /* numbers: coral */
-.tk-type { --tk: #ff7edb; } /* types / constants: hot pink */
-.tk-prop { --tk: #72f1b8; } /* properties: mint */
-.tk-pre { --tk: #b893ce; } /* preprocessor: purple */
-.tk-com { --tk: #848bbd; } /* comments: dim blue-violet */
-
-/* Neon on white looks washed out, so use deeper colors and drop the glow */
-:root.light .code-bg-block {
-  color: #3b3552;
-  text-shadow: none;
-}
-:root.light .code-bg-block [class^='tk-'] {
-  text-shadow: none;
-}
-:root.light .tk-kw { --tk: #a16207; }
-:root.light .tk-fn { --tk: #0e7490; }
-:root.light .tk-str { --tk: #c2410c; }
-:root.light .tk-num { --tk: #be123c; }
-:root.light .tk-type { --tk: #a21caf; }
-:root.light .tk-prop { --tk: #047857; }
-:root.light .tk-pre { --tk: #6d28d9; }
-:root.light .tk-com { --tk: #64748b; }
+.tk-kw { --tk: #fede5d; }
+.tk-fn { --tk: #36f9f6; }
+.tk-str { --tk: #ff8b39; }
+.tk-num { --tk: #f97e72; }
+.tk-type { --tk: #ff7edb; }
+.tk-prop { --tk: #72f1b8; }
+.tk-pre { --tk: #b893ce; }
+.tk-com { --tk: #848bbd; }
 
 .code-bg-cursor {
   display: inline-block;
   width: 0.55em;
-  height: 1.1em;
-  margin-left: 1px;
+  height: 1.05em;
+  margin-left: 2px;
   vertical-align: text-bottom;
-  background: #ff7edb;
-  box-shadow: 0 0 8px #ff7edb, 0 0 18px #ff7edb;
-}
-
-:root.light .code-bg-cursor {
-  box-shadow: none;
-  background: #a21caf;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .code-bg-cursor {
-    animation: cursor-blink 1s steps(1) infinite;
-  }
-}
-
-@keyframes cursor-blink {
-  50% {
-    opacity: 0;
-  }
+  background: #4ade80;
+  opacity: 0.85;
 }
 
 /* Modal open animation (native <dialog>) */

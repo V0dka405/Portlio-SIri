@@ -38,8 +38,8 @@ export const timeline: TimelineEntry[] = [
     id: 'sripatum-beng',
     kind: 'education',
     role: {
-      en: 'B.Eng. Computer Engineering (AIoT)',
-      th: 'วิศวกรรมศาสตรบัณฑิต สาขาวิศวกรรมคอมพิวเตอร์ (AIoT)',
+      en: 'B.Eng. Computer Engineering (CPE)',
+      th: 'วิศวกรรมศาสตรบัณฑิต สาขาวิศวกรรมคอมพิวเตอร์ (CPE)',
     },
     org: {
       en: 'Faculty of Information Technology, Sripatum University',
@@ -47,8 +47,8 @@ export const timeline: TimelineEntry[] = [
     },
     period: { en: '2023 – 2027', th: '2023 – 2027' },
     points: {
-      en: ['Cumulative GPA: 2.72'],
-      th: ['เกรดเฉลี่ยสะสม (GPA): 2.72'],
+      en: [],
+      th: [],
     },
   },
 ];

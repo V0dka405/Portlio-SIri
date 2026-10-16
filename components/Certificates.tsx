@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from './LanguageProvider';
 import Section from './Section';
 import Reveal from './Reveal';
-import ExternalLink from './ExternalLink';
 import { CertificateIcon, CloseIcon, DownloadIcon, ExternalIcon } from './icons';
 import { certificates, type Certificate } from '@/data/certificates';
 
@@ -49,10 +48,11 @@ export default function Certificates() {
                   src={cert.image}
                   alt={pick(cert.title)}
                   loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                 />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 backdrop-blur-[2px] transition-opacity duration-200 group-hover:opacity-100">
-                  <span className="btn-ghost border-accent/80 bg-bg/80 text-xs text-accent">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  <span className="btn-ghost border-accent/80 bg-bg/90 text-xs text-accent">
                     {t.certificates.preview}
                   </span>
                 </div>
@@ -71,21 +71,24 @@ export default function Certificates() {
                   )}
                 </div>
 
-                <h3 className="mt-3 text-lg font-bold leading-snug">
+                <h3 className="mt-3 font-display text-xl font-bold leading-snug text-fg">
                   {pick(cert.title)}
                 </h3>
 
-                <p className="mt-1 text-xs text-muted">
+                <p className="mt-1 font-mono text-xs text-muted">
                   {t.certificates.issuedOn}: {cert.issueDate}
                 </p>
 
-                <p className="mt-3 flex-1 text-sm text-muted">
+                <p className="mt-3.5 flex-1 text-sm leading-relaxed text-muted font-sans">
                   {pick(cert.summary)}
                 </p>
 
-                <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Skills">
+                <ul className="mt-5 flex flex-wrap gap-1.5" aria-label="Skills">
                   {cert.tags.map((tag) => (
-                    <li key={tag} className="chip">
+                    <li
+                      key={tag}
+                      className="font-mono text-xs rounded-md bg-bg/60 border border-line/70 px-2.5 py-1 text-muted"
+                    >
                       {tag}
                     </li>
                   ))}

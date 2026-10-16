@@ -1,56 +1,78 @@
 /**
- * Snippets typed out in the animated background (components/CodeBackground.tsx).
- * Edit freely — keep each snippet short (≈10–14 lines) so it stays decorative.
+ * Cybersecurity, Cryptography, Intrusion Detection & Zero-Trust code snippets
+ * streamed in real-time on the interactive background.
  */
 export const codeSnippets: string[] = [
-  `#include <WiFi.h>
-#include <PubSubClient.h>
+  `// [SEC-CRYPTO] AES-256-GCM Authenticated Encryption
+package crypto
 
-const int RELAY_PIN = 26;
-
-void loop() {
-  float moisture = readSoilSensor();
-  if (moisture < 35.0) {
-    digitalWrite(RELAY_PIN, HIGH);
-  } else {
-    digitalWrite(RELAY_PIN, LOW);
+func EncryptPayload(key, plaintext, aad []byte) ([]byte, error) {
+  block, err := aes.NewCipher(key)
+  if err != nil {
+    return nil, err
   }
-  client.publish("farm/moisture", String(moisture).c_str());
-  delay(5000);
+  gcm, err := cipher.NewGCM(block)
+  nonce := make([]byte, gcm.NonceSize())
+  rand.Read(nonce)
+  return gcm.Seal(nonce, nonce, plaintext, aad), nil
 }`,
-  `import mqtt from "mqtt";
+  `// [IDS-ENGINE] Real-Time SYN Flood & Port Scan Detector
+import scapy.all as net
+from collections import defaultdict
 
-const client = mqtt.connect(process.env.MQTT_URL);
+syn_tracker = defaultdict(set)
 
-client.on("connect", () => {
-  client.subscribe("locker/+/status");
-});
+def inspect_packet(pkt):
+  if pkt.haslayer("TCP") and pkt["TCP"].flags == "S":
+    src_ip = pkt["IP"].src
+    dst_port = pkt["TCP"].dport
+    syn_tracker[src_ip].add(dst_port)
+    if len(syn_tracker[src_ip]) > 50:
+      trigger_firewall_drop(src_ip, reason="PORT_SCAN_DETECTED")`,
+  `// [ZERO-TRUST] HMAC-SHA256 Token & Replay Guard
+import crypto from "node:crypto";
 
-export async function unlock(id: string) {
-  client.publish(\`locker/\${id}/cmd\`, "OPEN");
-  return { ok: true, id };
+export function verifySignedRequest(payload: string, sig: string, secret: string) {
+  const digest = crypto
+    .createHmac("sha256", secret)
+    .update(payload)
+    .digest("hex");
+  const a = Buffer.from(sig, "hex");
+  const b = Buffer.from(digest, "hex");
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }`,
-  `const detections = await faceapi
-  .detectSingleFace(video, new TinyFaceDetectorOptions())
-  .withFaceLandmarks()
-  .withFaceDescriptor();
+  `// [WAF-FILTER] Deep Packet SQLi & XSS Payload Inspector
+const THREAT_SIGS = [
+  /(\bUNION\b.*\bSELECT\b|--|\bDROP\s+TABLE\b)/i,
+  /(<script\b[^>]*>|javascript:|onerror\s*=)/i,
+];
 
-const distance = faceapi.euclideanDistance(
-  detections.descriptor,
-  user.descriptor
-);
-
-if (distance < 0.5) {
-  await api.post("/lockers/open", { userId });
+export function inspectHttpPayload(rawBody: string, clientIp: string) {
+  for (const rule of THREAT_SIGS) {
+    if (rule.test(rawBody)) {
+      quarantineSession(clientIp, "WAF_SIGNATURE_MATCH");
+      return { allowed: false, status: 403 };
+    }
+  }
+  return { allowed: true, status: 200 };
 }`,
-  `app.get("/api/restaurants", async (req, res) => {
-  const { lat, lng } = req.query;
-  const places = await fetchNearby(lat, lng);
-  const pick = places[Math.floor(Math.random() * places.length)];
-  res.json({
-    name: pick.name,
-    distance: pick.distance,
-    price: pick.priceLevel,
-  });
-});`,
+  `// [mTLS-GUARD] X.509 Certificate Pinning & TLS 1.3 Verifier
+pub fn verify_peer_cert(cert_der: &[u8], expected_sha256: &[u8; 32]) -> bool {
+  let digest = Sha256::digest(cert_der);
+  if constant_time_eq(&digest, expected_sha256) {
+    audit_log("mTLS_HANDSHAKE_VERIFIED");
+    return true;
+  }
+  alert_soc("CERT_PINNING_MISMATCH_BLOCKED");
+  false
+}`,
+  `// [SOC-AUDIT] Argon2id Password Hashing & Brute-Force Lockout
+export async function authenticateUser(uid: string, secret: string) {
+  const attempts = await redis.incr(\`sec:auth:fail:\${uid}\`);
+  if (attempts > 5) {
+    await redis.expire(\`sec:auth:fail:\${uid}\`, 900);
+    throw new SecurityLockoutError("ACCOUNT_TEMPORARILY_LOCKED");
+  }
+  return argon2.verify( await getStoredHash(uid), secret );
+}`,
 ];

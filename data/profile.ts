@@ -7,8 +7,8 @@ import type { Localized } from '@/lib/types';
 export const profile = {
   name: 'Siriwut Saleephan',
   title: {
-    en: 'Computer Engineering (AIoT) Student',
-    th: 'นักศึกษาวิศวกรรมคอมพิวเตอร์ (AIoT)',
+    en: 'Web, Mobile App & Backend Developer',
+    th: 'นักพัฒนา Web, Mobile App & Backend',
   } satisfies Localized<string>,
   email: 'pool254753@gmail.com',
   phone: '062-328-4172',
@@ -23,5 +23,5 @@ export const profile = {
   // TODO: set NEXT_PUBLIC_SITE_URL on Vercel (or edit the fallback) for correct OG / sitemap URLs
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portlio-s-iri.vercel.app',
   seoDescription:
-    'Portfolio of Siriwut Saleephan — Computer Engineering (AIoT) student building full-stack web apps, IoT systems (ESP32, MQTT) and computer-vision projects.',
+    'Portfolio of Siriwut Saleephan — Computer Engineering student specializing in Full-Stack Web, Mobile Applications, Backend APIs, and IoT integration.',
 };

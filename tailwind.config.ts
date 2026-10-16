@@ -1,7 +1,5 @@
 import type { Config } from 'tailwindcss';
 
-// Colors are CSS variables (see app/globals.css) so dark/light themes
-// switch by toggling a single class on <html>. Dark is the default.
 const withAlpha = (variable: string) => `rgb(var(${variable}) / <alpha-value>)`;
 
 const config: Config = {
@@ -19,17 +17,18 @@ const config: Config = {
         'on-accent': withAlpha('--c-on-accent'),
       },
       fontFamily: {
-        // Inter for Latin, Noto Sans Thai picked up automatically for Thai glyphs
-        sans: ['var(--font-inter)', 'var(--font-noto-thai)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'var(--font-prompt)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-space-grotesk)', 'var(--font-prompt)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       keyframes: {
         'fade-up': {
-          from: { opacity: '0', transform: 'translateY(16px)' },
+          from: { opacity: '0', transform: 'translateY(8px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        'fade-up': 'fade-up 0.6s ease-out both',
+        'fade-up': 'fade-up 0.25s ease-out both',
       },
     },
   },
