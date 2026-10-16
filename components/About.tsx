@@ -48,7 +48,7 @@ export default function About() {
               </p>
 
               <p className="mt-1 text-xs text-muted font-mono">
-                Sripatum University · Faculty of Engineering (CPE)
+                Sripatum University · Faculty of Information Technology
               </p>
 
               {/* Action Buttons */}
@@ -84,17 +84,19 @@ export default function About() {
 
               {/* Quick Info Specs */}
               <div className="mt-6 pt-5 border-t border-line/40 text-left font-mono text-xs space-y-2.5 text-muted">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted/70">// Location</span>
-                  <span className="text-fg font-sans">Bangkok, Thailand</span>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-muted/70 shrink-0">// Location</span>
+                  <span className="text-fg font-sans text-right">Bangkok, Thailand</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted/70">// Degree</span>
-                  <span className="text-fg font-sans">B.Eng. Computer Eng</span>
+                <div className="flex items-start justify-between gap-3">
+                  <span className="text-muted/70 shrink-0">// Degree</span>
+                  <span className="text-fg font-sans text-right leading-snug">
+                    Faculty of Information Technology, Department of Computer Engineering, IoT
+                  </span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted/70">// Focus</span>
-                  <span className="text-accent font-sans">Web · Mobile · IoT · AI</span>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-muted/70 shrink-0">// Focus</span>
+                  <span className="text-accent font-sans text-right">Web · Mobile · IoT · AI</span>
                 </div>
               </div>
             </div>

@@ -38,12 +38,12 @@ export const timeline: TimelineEntry[] = [
     id: 'sripatum-beng',
     kind: 'education',
     role: {
-      en: 'B.Eng. Computer Engineering (CPE)',
-      th: 'วิศวกรรมศาสตรบัณฑิต สาขาวิศวกรรมคอมพิวเตอร์ (CPE)',
+      en: 'Faculty of Information Technology, Department of Computer Engineering, IoT',
+      th: 'คณะเทคโนโลยีสารสนเทศ สาขาวิศวกรรมคอมพิวเตอร์ (IoT)',
     },
     org: {
-      en: 'Faculty of Information Technology, Sripatum University',
-      th: 'คณะเทคโนโลยีสารสนเทศ มหาวิทยาลัยศรีปทุม',
+      en: 'Sripatum University',
+      th: 'มหาวิทยาลัยศรีปทุม',
     },
     period: { en: '2023 – 2027', th: '2023 – 2027' },
     points: {
