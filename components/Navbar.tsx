@@ -158,17 +158,33 @@ export default function Navbar() {
             {locale === 'en' ? 'TH' : 'EN'}
           </button>
 
-          {/* Hamburger Button (visible ONLY on Mobile/Tablet < 900px) */}
+          {/* Hamburger Button (visible ONLY on Mobile/Tablet < 900px) — pulses invitingly when closed */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-expanded={mobileMenuOpen}
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            className="min-[900px]:hidden inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-line bg-surface text-fg/90 transition-colors hover:border-accent hover:text-accent shrink-0"
+            className={`min-[900px]:hidden relative inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border transition-all shrink-0 ${
+              mobileMenuOpen
+                ? 'border-accent bg-accent text-on-accent shadow-[0_0_14px_rgba(74,222,128,0.5)]'
+                : 'border-accent/80 bg-accent/15 text-accent shadow-[0_0_12px_rgba(74,222,128,0.35)] hover:bg-accent/25'
+            }`}
           >
+            {!mobileMenuOpen && (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-0.5 rounded-full border border-accent/60 animate-ping opacity-50"
+                />
+                <span className="pointer-events-none absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-80" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent shadow-sm" />
+                </span>
+              </>
+            )}
             <svg
               viewBox="0 0 24 24"
-              className="h-4 w-4 stroke-current"
+              className={`h-4 w-4 stroke-current ${!mobileMenuOpen ? 'animate-pulse' : ''}`}
               fill="none"
               strokeWidth="2.2"
               strokeLinecap="round"
