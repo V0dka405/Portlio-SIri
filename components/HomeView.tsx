@@ -70,41 +70,41 @@ export default function HomeView() {
       <Hero />
 
       {/* Explore Section Hub */}
-      <section className="container-page pt-4 pb-16">
-        <div className="mb-8 border-b border-line/40 pb-4">
-          <p className="font-mono text-xs font-semibold uppercase tracking-widest text-accent">
+      <section className="container-page pt-2 sm:pt-4 pb-12 sm:pb-16">
+        <div className="mb-6 sm:mb-8 border-b border-line/40 pb-3 sm:pb-4">
+          <p className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-accent">
             // Navigation Index
           </p>
-          <h2 className="mt-1 font-display text-2xl font-bold tracking-tight text-fg sm:text-3xl">
+          <h2 className="mt-1 font-display text-xl font-bold tracking-tight text-fg sm:text-3xl">
             {locale === 'th' ? 'สำรวจพอร์ตโฟลิโอ' : 'Explore Portfolio'}
           </h2>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3.5 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {EXPLORE_ITEMS.map((item) => (
             <NavLink
               key={item.href}
               href={item.href}
-              className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface/90 p-6 transition-all duration-200 hover:border-accent hover:bg-surface hover:-translate-y-1 shadow-sm hover:shadow-lg hover:shadow-accent/5"
+              className="group relative flex flex-col justify-between rounded-2xl border border-line bg-surface/90 p-5 sm:p-6 transition-all duration-200 hover:border-accent hover:bg-surface hover:-translate-y-1 shadow-sm hover:shadow-lg hover:shadow-accent/5"
             >
               <div>
-                <div className="mb-3 flex items-center justify-between">
-                  <span className="font-mono text-[11px] font-semibold uppercase tracking-wider text-accent">
+                <div className="mb-2 sm:mb-3 flex items-center justify-between">
+                  <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-accent">
                     {item.tag}
                   </span>
                   <span className="font-mono text-xs text-muted transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent">
                     →
                   </span>
                 </div>
-                <h3 className="font-display text-lg font-bold text-fg transition-colors group-hover:text-accent">
+                <h3 className="font-display text-base sm:text-lg font-bold text-fg transition-colors group-hover:text-accent">
                   {locale === 'th' ? item.titleTh : item.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted font-sans">
+                <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted font-sans">
                   {locale === 'th' ? item.descTh : item.desc}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-line/40 flex items-center justify-between font-mono text-xs text-muted">
+              <div className="mt-4 sm:mt-5 pt-2.5 sm:pt-3 border-t border-line/40 flex items-center justify-between font-mono text-[11px] sm:text-xs text-muted">
                 <span>Navigate</span>
                 <span className="text-accent/80 font-medium group-hover:underline">
                   {locale === 'th' ? 'เปิดดูหน้า →' : 'View Page'}

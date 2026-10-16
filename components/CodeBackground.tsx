@@ -342,12 +342,12 @@ export default function CodeBackground() {
     >
       <canvas ref={canvasRef} className="h-full w-full" />
 
-      {/* Streaming cybersecurity code terminals with GPU-composited mouse parallax */}
-      <div className="code-bg opacity-[0.22]">
+      {/* Streaming cybersecurity code terminals — softer on mobile to avoid visual clutter */}
+      <div className="code-bg opacity-[0.10] sm:opacity-[0.22]">
         <TypingBlock
           startIndex={0}
           blockRef={block0Ref}
-          className="left-4 top-24 sm:left-10"
+          className="left-3 top-28 sm:left-10 sm:top-24"
         />
         <TypingBlock
           startIndex={2}

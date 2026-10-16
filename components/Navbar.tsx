@@ -58,6 +58,8 @@ export default function Navbar() {
         width: mEl.offsetWidth,
         visible: true,
       });
+      // Automatically keep active tab centered in mobile horizontal scroll bar
+      mEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
   }, []);
 
@@ -70,10 +72,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/40 bg-bg/90 backdrop-blur-md">
-      {/* Main Header bar with equal left & right wings for mathematical center alignment */}
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex h-16 sm:h-20 items-center justify-between gap-2">
+      {/* Main Header bar: slim on mobile (h-14), spacious on desktop (sm:h-20) */}
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex h-14 sm:h-20 items-center justify-between gap-2">
         {/* Left Wing: <Siriwut/> links to Home (/) */}
-        <div className="w-36 sm:w-44 flex items-center justify-start shrink-0">
+        <div className="min-[900px]:w-44 flex items-center justify-start shrink-0">
           <NavLink
             href="/"
             className="font-mono text-base sm:text-lg font-bold tracking-tight inline-flex items-center hover:opacity-80 transition-opacity"
@@ -84,13 +86,12 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        {/* Center: Flex-centered Pill Bar linking to dedicated pages in 0ms */}
+        {/* Center: Desktop Pill Bar (min-[900px]) */}
         <nav
           aria-label="Desktop page navigation"
           className="hidden min-[900px]:flex flex-1 items-center justify-center min-w-0 px-2"
         >
           <div className="relative flex items-center rounded-full border border-white/10 bg-[#1e1d22] p-1.5 font-mono shadow-lg">
-            {/* GPU-accelerated sliding active pill */}
             <span
               aria-hidden="true"
               style={{
@@ -126,11 +127,11 @@ export default function Navbar() {
         </nav>
 
         {/* Right Wing: Download CV and Language toggle */}
-        <div className="w-36 sm:w-44 flex items-center justify-end gap-2 shrink-0">
+        <div className="min-[900px]:w-44 flex items-center justify-end gap-2 shrink-0">
           <a
             href={profile.cvPath}
             download
-            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3.5 font-mono text-xs font-semibold text-accent hover:bg-accent/20 hover:border-accent transition-all shadow-sm whitespace-nowrap"
+            className="inline-flex h-8 sm:h-9 items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 sm:px-3.5 font-mono text-[11px] sm:text-xs font-semibold text-accent hover:bg-accent/20 hover:border-accent transition-all shadow-sm whitespace-nowrap"
             title="Download CV"
           >
             <span>Download CV</span>
@@ -140,7 +141,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setLocale(locale === 'en' ? 'th' : 'en')}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface font-mono text-xs font-semibold text-fg/90 transition-all hover:border-accent hover:text-accent hover:bg-accent/5 shrink-0"
+            className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-line bg-surface font-mono text-[11px] sm:text-xs font-semibold text-fg/90 transition-all hover:border-accent hover:text-accent hover:bg-accent/5 shrink-0"
             aria-label={t.nav.switchLanguage}
             lang={locale === 'en' ? 'th' : 'en'}
           >
@@ -149,14 +150,13 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile / Narrow Screen: Centered pill bar row underneath (< 900px) */}
-      <div className="min-[900px]:hidden pb-2.5 pt-0.5 px-3 flex justify-center">
+      {/* Mobile / Tablet (< 900px): Clean, breathable pill dock */}
+      <div className="min-[900px]:hidden pb-2 pt-0.5 px-3 flex justify-center">
         <nav
           aria-label="Mobile page navigation"
-          className="w-full max-w-[calc(100vw-20px)] flex items-center justify-center"
+          className="w-full max-w-full flex items-center justify-center"
         >
-          <div className="relative flex items-center rounded-2xl border border-white/10 bg-[#1e1d22] p-1 font-mono shadow-md overflow-x-auto no-scrollbar">
-            {/* GPU-accelerated mobile sliding pill */}
+          <div className="relative flex items-center rounded-full border border-white/10 bg-[#1e1d22] p-1 font-mono shadow-md overflow-x-auto no-scrollbar max-w-full">
             <span
               aria-hidden="true"
               style={{
@@ -164,10 +164,10 @@ export default function Navbar() {
                 width: `${mobilePill.width}px`,
                 opacity: mobilePill.visible ? 1 : 0,
               }}
-              className="pointer-events-none absolute top-1 bottom-1 left-0 rounded-xl bg-[#1865f2] shadow-sm transition-[transform,width,opacity] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,width]"
+              className="pointer-events-none absolute top-1 bottom-1 left-0 rounded-full bg-[#1865f2] shadow-sm transition-[transform,width,opacity] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[transform,width]"
             />
 
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 sm:gap-1 px-0.5">
               {links.map((id) => {
                 const isActive = activeTab === id;
                 return (
@@ -177,7 +177,7 @@ export default function Navbar() {
                       mobileRefs.current[id] = el;
                     }}
                     href={`/${id}`}
-                    className={`relative z-10 flex shrink-0 select-none items-center justify-center px-3 py-1.5 text-xs font-semibold tracking-wider lowercase transition-colors duration-150 outline-none rounded-xl ${
+                    className={`relative z-10 flex shrink-0 select-none items-center justify-center px-2.5 sm:px-3.5 py-1 text-[11px] sm:text-xs font-semibold tracking-wide lowercase transition-colors duration-150 outline-none rounded-full ${
                       isActive ? 'text-white' : 'text-[#8e8d93] hover:text-white'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
