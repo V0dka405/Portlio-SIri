@@ -91,7 +91,9 @@ export default function About() {
                 <div className="flex items-start justify-between gap-3">
                   <span className="text-muted/70 shrink-0">// Degree</span>
                   <span className="text-fg font-sans text-right leading-snug">
-                    Faculty of Information Technology, Department of Computer Engineering, IoT
+                    Faculty of Information Technology,
+                    <br />
+                    Department of Computer Engineering, IoT
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-3">
